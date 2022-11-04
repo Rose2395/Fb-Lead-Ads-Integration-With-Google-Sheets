@@ -45,8 +45,7 @@ var final_lead_information ={};
     
     
     
-    var propertyType = final_lead_information['conditional_question_2'];
-    var property = final_lead_information['conditional_question_1'];
+    
     var email = final_lead_information['email'];
     var name = final_lead_information['full_name'];
     var phoneNum= final_lead_information['phone_number'];
@@ -56,7 +55,7 @@ var final_lead_information ={};
 
 
     // Record it in the Google Sheets
-    active_sheet.appendRow([date,name,email,phoneNum,property,propertyType]); 
+    active_sheet.appendRow([date,name,email,phoneNum]); 
 
     sendMail(final_lead_information,formatedDate);
   }
@@ -66,9 +65,9 @@ var final_lead_information ={};
     var receipients = "example@google.com";
     var plain_body = '';
     var html_body = 'You have got a new lead.<br/><br/> Created Time : '+formatedDate+'<br/>';
-    var format_order = ['full_name', 'email', 'phone_number','conditional_question_1','conditional_question_2'];
+    var format_order = ['full_name', 'email', 'phone_number'];
 
-    var format_order1 = ['Full Name', 'Email', 'Phone Number','Property','Property Type'];
+    var format_order1 = ['Full Name', 'Email', 'Phone Number'];
     for( var y = 0; y < format_order.length; y++ ) {
       
       // Plain Body Content
