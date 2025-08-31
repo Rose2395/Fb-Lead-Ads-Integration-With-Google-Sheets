@@ -30,21 +30,18 @@ function doPost(request) {
 
     // Get lead identifier
     const leadId = entry.changes[0].value.leadgen_id;
-    const lead_info_endpoint = `https://graph.facebook.com/v15.0/${lead_id}?access_token=${accessToken}`;
+    const lead_info_endpoint = `https://graph.facebook.com/v15.0/${leadId}?access_token=${accessToken}`;
     const leadRequest = UrlFetchApp.fetch(lead_info_endpoint);
     var leadResponse = JSON.parse(leadRequest);
     var leadData = leadResponse.field_data;
 
     const final_lead_information = {};
 
-    // Compile all data in an object
-    for (var x = 0; x < leadData.length; x++) {
+    for (let x = 0; x < leadData.length; x++) {
       final_lead_information[leadData[x].name] = leadData[x].values[0];
     }
     const values = Object.values(final_lead_information);
     sheet.appendRow([sheetDateTime, adAccountDateTime, ...values]);
-
-    // Record it in the Google Sheets
 
     sendMail(final_lead_information, formatedDate);
   }
